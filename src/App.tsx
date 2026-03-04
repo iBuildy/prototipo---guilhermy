@@ -117,7 +117,7 @@ export default function App() {
               onClick={handleBooking}
               className="bg-[#FFE100] hover:bg-[#FFD700] text-black px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-[#FFE100]/20"
             >
-              Agendar Consulta
+              Agendar Agora
             </button>
           </div>
 
@@ -184,7 +184,7 @@ export default function App() {
                 onClick={handleBooking}
                 className="bg-[#FFE100] hover:bg-[#FFD700] text-black px-8 py-4 rounded-full text-lg font-bold transition-all flex items-center justify-center gap-2 group shadow-xl shadow-[#FFE100]/20"
               >
-                Quero Agendar Minha Sessão <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                Agendar Agora <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
               <button
                 onClick={() => scrollToSection('método')}
@@ -313,7 +313,7 @@ export default function App() {
                 onClick={handleBooking}
                 className="bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-[#FFE100] transition-all"
               >
-                Agendar Consultoria Inicial
+                Agendar Agora
               </button>
             </div>
           </div>
@@ -481,7 +481,7 @@ export default function App() {
             onClick={handleWhatsApp}
             className="bg-[#FFE100] hover:bg-[#FFD700] text-black px-12 py-6 rounded-full text-xl font-bold transition-all shadow-2xl shadow-[#FFE100]/40 flex items-center justify-center gap-3 mx-auto group"
           >
-            <MessageCircle className="w-6 h-6" /> Falar com Guilhermy no WhatsApp
+            <MessageCircle className="w-6 h-6" /> Falar no WhatsApp
           </button>
           <p className="mt-6 text-sm text-gray-500 flex items-center justify-center gap-2">
             <ShieldCheck className="w-4 h-4" /> Atendimento 100% sigiloso e ético
