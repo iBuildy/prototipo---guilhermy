@@ -328,7 +328,7 @@ export default function App() {
                 referrerPolicy="no-referrer"
               />
             </div>
-            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-amber-500/5 blur-[100px] rounded-full" />
+            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#FFE100]/5 blur-[100px] rounded-full" />
           </div>
           <div>
             <SectionTitle subtitle="O Especialista">Guilhermy Joseph</SectionTitle>
@@ -376,7 +376,7 @@ export default function App() {
             ].map((item, idx) => (
               <div key={idx} className="p-8 rounded-3xl glass-card border-white/5">
                 <div className="flex gap-1 mb-4">
-                  {[1, 2, 3, 4, 5].map(i => <Zap key={i} className="w-4 h-4 text-amber-500 fill-amber-500" />)}
+                  {[1, 2, 3, 4, 5].map(i => <Zap key={i} className="w-4 h-4 text-[#FFE100] fill-[#FFE100]" />)}
                 </div>
                 <p className="text-gray-300 italic mb-6">"{item.text}"</p>
                 <div className="flex items-center gap-3">
@@ -424,14 +424,14 @@ export default function App() {
         <div className="absolute inset-0 bg-[#FFE100]/10 pointer-events-none" />
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <h2 className="text-4xl md:text-6xl font-display font-bold mb-8">
-            Pronto para retomar o <span className="text-amber-500">controle</span> da sua mente?
+            Pronto para retomar o <span className="text-[#FFE100]">controle</span> da sua mente?
           </h2>
           <p className="text-xl text-gray-400 mb-12">
             Não espere o burnout chegar para agir. O próximo nível do seu negócio exige um novo nível de saúde mental.
           </p>
           <button
             onClick={handleWhatsApp}
-            className="bg-amber-600 hover:bg-amber-500 text-white px-12 py-6 rounded-full text-xl font-bold transition-all shadow-2xl shadow-amber-900/40 flex items-center justify-center gap-3 mx-auto group"
+            className="bg-[#FFE100] hover:bg-[#FFD700] text-black px-12 py-6 rounded-full text-xl font-bold transition-all shadow-2xl shadow-[#FFE100]/40 flex items-center justify-center gap-3 mx-auto group"
           >
             <MessageCircle className="w-6 h-6" /> Falar com Guilhermy no WhatsApp
           </button>
