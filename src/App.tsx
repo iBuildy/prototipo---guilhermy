@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  ArrowRight, 
-  CheckCircle2, 
-  Brain, 
-  Target, 
-  Zap, 
-  MessageCircle, 
-  ChevronDown, 
-  Instagram, 
-  Linkedin, 
-  Clock, 
+import {
+  ArrowRight,
+  CheckCircle2,
+  Brain,
+  Target,
+  Zap,
+  MessageCircle,
+  ChevronDown,
+  Instagram,
+  Linkedin,
+  Clock,
   ShieldCheck,
   Menu,
   X
@@ -33,7 +33,7 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="border-b border-white/10 last:border-0">
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-6 flex justify-between items-center text-left hover:text-emerald-400 transition-colors"
       >
@@ -42,7 +42,7 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
       </button>
       <AnimatePresence>
         {isOpen && (
-          <motion.div 
+          <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -58,9 +58,22 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
   );
 };
 
+const BOOKING_CONFIG = {
+  calendly: 'https://calendly.com/your-profile', // Replace with your Calendly/Cal.com link
+  whatsapp: 'https://wa.me/5500000000000',      // Replace with your WhatsApp link (format: 55 + DDD + Number)
+};
+
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const handleBooking = () => {
+    window.open(BOOKING_CONFIG.calendly, '_blank');
+  };
+
+  const handleWhatsApp = () => {
+    window.open(BOOKING_CONFIG.whatsapp, '_blank');
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -85,18 +98,21 @@ export default function App() {
             <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center font-display font-extrabold text-black text-xs">GJ</div>
             <span className="font-display font-bold text-xl tracking-tighter">@psicologododigital</span>
           </div>
-          
+
           <div className="hidden md:flex items-center gap-8">
             {['Dores', 'Método', 'Sobre', 'FAQ'].map((item) => (
-              <button 
-                key={item} 
+              <button
+                key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
                 className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
               >
                 {item}
               </button>
             ))}
-            <button className="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-emerald-900/20">
+            <button
+              onClick={handleBooking}
+              className="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-emerald-900/20"
+            >
               Agendar Consulta
             </button>
           </div>
@@ -110,7 +126,7 @@ export default function App() {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -118,15 +134,18 @@ export default function App() {
           >
             <div className="flex flex-col gap-6 text-center">
               {['Dores', 'Método', 'Sobre', 'FAQ'].map((item) => (
-                <button 
-                  key={item} 
+                <button
+                  key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
                   className="text-2xl font-display font-bold text-white"
                 >
                   {item}
                 </button>
               ))}
-              <button className="bg-emerald-600 text-white px-8 py-4 rounded-full text-lg font-bold mt-4">
+              <button
+                onClick={handleBooking}
+                className="bg-emerald-600 text-white px-8 py-4 rounded-full text-lg font-bold mt-4"
+              >
                 Agendar Agora
               </button>
             </div>
@@ -142,7 +161,7 @@ export default function App() {
         </div>
 
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -157,10 +176,13 @@ export default function App() {
               Vença a procrastinação e proteja sua mente no mercado mais competitivo do mundo. Terapia exclusiva para empreendedores, creators e gestores digitais.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-full text-lg font-bold transition-all flex items-center justify-center gap-2 group">
+              <button
+                onClick={handleBooking}
+                className="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-full text-lg font-bold transition-all flex items-center justify-center gap-2 group"
+              >
                 Quero Agendar Minha Sessão <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('método')}
                 className="px-8 py-4 rounded-full text-lg font-bold border border-white/10 hover:bg-white/5 transition-all text-center"
               >
@@ -171,7 +193,7 @@ export default function App() {
               <div className="flex -space-x-2">
                 {[1, 2, 3].map(i => (
                   <div key={i} className="w-8 h-8 rounded-full border-2 border-black bg-gray-800 flex items-center justify-center overflow-hidden">
-                    <img src={`https://picsum.photos/seed/${i+10}/100/100`} alt="Avatar" referrerPolicy="no-referrer" />
+                    <img src={`https://picsum.photos/seed/${i + 10}/100/100`} alt="Avatar" referrerPolicy="no-referrer" />
                   </div>
                 ))}
               </div>
@@ -179,7 +201,7 @@ export default function App() {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
@@ -187,9 +209,9 @@ export default function App() {
           >
             <div className="relative z-10 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
               <div className="aspect-[4/5] bg-gradient-to-t from-emerald-950/40 to-black relative group">
-                <img 
-                  src="https://ugc.production.linktr.ee/aa621d04-79a7-49fb-af3c-edc7618872c9_IMG-3825.jpeg" 
-                  alt="Guilhermy Joseph" 
+                <img
+                  src="https://ugc.production.linktr.ee/aa621d04-79a7-49fb-af3c-edc7618872c9_IMG-3825.jpeg"
+                  alt="Guilhermy Joseph"
                   className="w-full h-full object-cover mix-blend-luminosity hover:mix-blend-normal transition-all duration-700"
                   referrerPolicy="no-referrer"
                 />
@@ -229,7 +251,7 @@ export default function App() {
                 desc: "A sensação de que você nunca faz o suficiente, mesmo trabalhando 12h por dia. O corpo está pedindo socorro."
               }
             ].map((item, idx) => (
-              <motion.div 
+              <motion.div
                 key={idx}
                 whileHover={{ y: -10 }}
                 className="p-8 rounded-3xl glass-card border-white/5 hover:border-emerald-500/30 transition-all"
@@ -283,7 +305,10 @@ export default function App() {
               <p className="text-gray-400 text-lg mb-8">
                 O mercado digital não dorme, mas você precisa. Meu acompanhamento une a profundidade da psicologia clínica com o dinamismo que o seu negócio exige.
               </p>
-              <button className="bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-emerald-500 hover:text-white transition-all">
+              <button
+                onClick={handleBooking}
+                className="bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-emerald-500 hover:text-white transition-all"
+              >
                 Agendar Consultoria Inicial
               </button>
             </div>
@@ -296,9 +321,9 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
           <div className="relative">
             <div className="aspect-square rounded-full overflow-hidden border-8 border-white/5 relative z-10">
-              <img 
-                src="https://ugc.production.linktr.ee/aa621d04-79a7-49fb-af3c-edc7618872c9_IMG-3825.jpeg" 
-                alt="Guilhermy Joseph" 
+              <img
+                src="https://ugc.production.linktr.ee/aa621d04-79a7-49fb-af3c-edc7618872c9_IMG-3825.jpeg"
+                alt="Guilhermy Joseph"
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
@@ -374,21 +399,21 @@ export default function App() {
         <div className="max-w-3xl mx-auto px-6">
           <SectionTitle subtitle="Dúvidas Frequentes">Transparência Total</SectionTitle>
           <div className="mt-12">
-            <FAQItem 
-              question="Como funciona a primeira sessão?" 
-              answer="A primeira sessão é um momento de acolhimento e diagnóstico. Vamos entender suas principais travas, rotina e objetivos para desenhar um plano terapêutico personalizado." 
+            <FAQItem
+              question="Como funciona a primeira sessão?"
+              answer="A primeira sessão é um momento de acolhimento e diagnóstico. Vamos entender suas principais travas, rotina e objetivos para desenhar um plano terapêutico personalizado."
             />
-            <FAQItem 
-              question="As sessões são online?" 
-              answer="Sim, todos os atendimentos são realizados via videoconferência em uma plataforma segura e sigilosa, permitindo que você faça sua terapia de qualquer lugar do mundo." 
+            <FAQItem
+              question="As sessões são online?"
+              answer="Sim, todos os atendimentos são realizados via videoconferência em uma plataforma segura e sigilosa, permitindo que você faça sua terapia de qualquer lugar do mundo."
             />
-            <FAQItem 
-              question="Qual a duração do tratamento?" 
-              answer="A psicologia não é uma ciência exata, mas meu foco é em resultados. O tempo varia conforme a demanda, mas muitos pacientes relatam melhoras significativas na gestão de ansiedade e foco nas primeiras 4 a 8 semanas." 
+            <FAQItem
+              question="Qual a duração do tratamento?"
+              answer="A psicologia não é uma ciência exata, mas meu foco é em resultados. O tempo varia conforme a demanda, mas muitos pacientes relatam melhoras significativas na gestão de ansiedade e foco nas primeiras 4 a 8 semanas."
             />
-            <FAQItem 
-              question="Você atende convênios?" 
-              answer="Atendo apenas na modalidade particular para garantir a exclusividade e qualidade do acompanhamento. No entanto, emito recibos para que você possa solicitar reembolso junto ao seu plano de saúde." 
+            <FAQItem
+              question="Você atende convênios?"
+              answer="Atendo apenas na modalidade particular para garantir a exclusividade e qualidade do acompanhamento. No entanto, emito recibos para que você possa solicitar reembolso junto ao seu plano de saúde."
             />
           </div>
         </div>
@@ -404,7 +429,10 @@ export default function App() {
           <p className="text-xl text-gray-400 mb-12">
             Não espere o burnout chegar para agir. O próximo nível do seu negócio exige um novo nível de saúde mental.
           </p>
-          <button className="bg-emerald-600 hover:bg-emerald-500 text-white px-12 py-6 rounded-full text-xl font-bold transition-all shadow-2xl shadow-emerald-900/40 flex items-center justify-center gap-3 mx-auto group">
+          <button
+            onClick={handleWhatsApp}
+            className="bg-emerald-600 hover:bg-emerald-500 text-white px-12 py-6 rounded-full text-xl font-bold transition-all shadow-2xl shadow-emerald-900/40 flex items-center justify-center gap-3 mx-auto group"
+          >
             <MessageCircle className="w-6 h-6" /> Falar com Guilhermy no WhatsApp
           </button>
           <p className="mt-6 text-sm text-gray-500 flex items-center justify-center gap-2">
