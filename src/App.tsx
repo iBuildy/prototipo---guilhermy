@@ -59,8 +59,9 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
 };
 
 const BOOKING_CONFIG = {
-  calendly: 'https://calendly.com/your-profile', // Replace with your Calendly/Cal.com link
-  whatsapp: 'https://wa.me/5500000000000',      // Replace with your WhatsApp link (format: 55 + DDD + Number)
+  // Option: WhatsApp Direct (Zero friction, high conversion)
+  booking: 'https://wa.me/554797066007?text=Olá%20Guilhermy!%20Vim%20pelo%20seu%20site%20e%20gostaria%20de%20agendar%20uma%20consulta%20estratégica.',
+  whatsapp: 'https://wa.me/554797066007?text=Olá%20Guilhermy!%20Vim%20pelo%20seu%20site%20e%20gostaria%20de%20tirar%20uma%20dúvida.',
 };
 
 export default function App() {
@@ -68,7 +69,7 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false);
 
   const handleBooking = () => {
-    window.open(BOOKING_CONFIG.calendly, '_blank');
+    window.open(BOOKING_CONFIG.booking, '_blank');
   };
 
   const handleWhatsApp = () => {
