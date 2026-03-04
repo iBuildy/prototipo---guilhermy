@@ -316,6 +316,50 @@ export default function App() {
         </div>
       </section>
 
+      {/* Process Section */}
+      <section className="py-24 bg-black relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <SectionTitle subtitle="Processo de Elite">Como funciona o Jornada?</SectionTitle>
+
+          <div className="grid md:grid-cols-4 gap-8 relative mt-16">
+            <div className="hidden md:block absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#FFE100]/20 to-transparent -translate-y-full" />
+
+            {[
+              {
+                step: "01",
+                title: "Triagem Estratégica",
+                desc: "Uma breve análise do seu momento atual via chat."
+              },
+              {
+                step: "02",
+                title: "Diagnóstico Clínico",
+                desc: "Identificamos as raízes das suas travas mentais."
+              },
+              {
+                step: "03",
+                title: "Plano de Manobra",
+                desc: "Protocolos práticos para sua rotina e negócio."
+              },
+              {
+                step: "04",
+                title: "Escala Sustentável",
+                desc: "Acompanhamento focado em manter o topo."
+              }
+            ].map((item, idx) => (
+              <div key={idx} className="relative group">
+                <div className="absolute -top-12 right-0 text-7xl font-display font-black text-white/[0.03] group-hover:text-[#FFE100]/5 transition-colors">
+                  {item.step}
+                </div>
+                <h3 className="text-[#FFE100] text-xl font-display font-bold mb-4">{item.title}</h3>
+                <p className="text-gray-400 leading-relaxed text-sm">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* About Section */}
       <section id="sobre" className="py-24 bg-[#FFE100]/5">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
