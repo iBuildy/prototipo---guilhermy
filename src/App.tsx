@@ -9,6 +9,9 @@ import {
   ChevronDown,
   Instagram,
   Linkedin,
+  Youtube,
+  Facebook,
+  Music2, // Using Music2 for TikTok
   Clock,
   ShieldCheck,
   Menu,
@@ -497,9 +500,12 @@ export default function App() {
             © 2024 Guilhermy Joseph - Psicólogo do Digital. Todos os direitos reservados. <br className="md:hidden" />
             <span className="hidden md:inline"> | </span> CRP 12/17648
           </div>
-          <div className="flex gap-6">
-            <a href="#" className="text-gray-500 hover:text-white transition-colors"><Instagram className="w-5 h-5" /></a>
-            <a href="#" className="text-gray-500 hover:text-white transition-colors"><Linkedin className="w-5 h-5" /></a>
+          <div className="flex gap-4">
+            <a href="https://instagram.com/psicologododigital" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FFE100] transition-colors"><Instagram className="w-5 h-5" /></a>
+            <a href="https://tiktok.com/@psicologododigital" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FFE100] transition-colors"><Music2 className="w-5 h-5" /></a>
+            <a href="https://www.facebook.com/guilhermy.joseph" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FFE100] transition-colors"><Facebook className="w-5 h-5" /></a>
+            <a href="https://www.youtube.com/@guilhermy.joseph" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FFE100] transition-colors"><Youtube className="w-5 h-5" /></a>
+            <a href="https://www.linkedin.com/in/guilhermy-joseph-evaristo-costa-28a78511b/" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FFE100] transition-colors"><Linkedin className="w-5 h-5" /></a>
           </div>
         </div>
       </footer>
