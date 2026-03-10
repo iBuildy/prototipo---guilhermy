@@ -15,9 +15,10 @@ import {
   Clock,
   ShieldCheck,
   Menu,
-  X
+  X,
+  Star
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useAnimationControls } from 'motion/react';
 
 const SectionTitle = ({ children, subtitle }: { children: React.ReactNode; subtitle?: string }) => (
   <div className="mb-12 text-center">
@@ -78,6 +79,34 @@ export default function App() {
   const handleWhatsApp = () => {
     window.open(BOOKING_CONFIG.whatsapp, '_blank');
   };
+
+  const testimonials = [
+    {
+      name: "Rafael Carneiro",
+      role: "Empresário & Creator",
+      text: "O Guilhermy entende a pressão de quem vive do digital. Em poucas sessões, consegui reorganizar minha rotina e parar de me sentir culpado por descansar."
+    },
+    {
+      name: "Mariana Silva",
+      role: "Infoprodutora",
+      text: "Terapia para quem escala não pode ser lenta. O método direto dele me ajudou a tomar decisões mais lúcidas no meu lançamento."
+    },
+    {
+      name: "Lucas Mendes",
+      role: "Gestor de Tráfego",
+      text: "Minha ansiedade estava impactando meu faturamento. Hoje tenho clareza e foco total no que realmente importa."
+    },
+    {
+      name: "Ana Clara",
+      role: "Content Creator",
+      text: "Finalmente alguém que entende o que é a pressão de uma audiência de 500k pessoas. Me sinto muito mais segura e focada."
+    },
+    {
+      name: "Roberto S.",
+      role: "Gestor de Tráfego",
+      text: "Parei de procrastinar tarefas críticas. O método é direto ao ponto e muito prático para quem não tem tempo a perder."
+    }
+  ];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -325,37 +354,30 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6">
           <SectionTitle subtitle="Processo de Elite">Como funciona o Jornada?</SectionTitle>
 
-          <div className="grid md:grid-cols-4 gap-8 relative mt-16">
-            <div className="hidden md:block absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#FFE100]/20 to-transparent -translate-y-full" />
-
+          <div className="grid md:grid-cols-3 gap-12 relative mt-16">
             {[
               {
                 step: "01",
-                title: "Triagem Estratégica",
-                desc: "Uma breve análise do seu momento atual via chat."
+                title: "Diagnóstico de Performance",
+                desc: "Identificamos os gargalos mentais que estão travando sua produtividade e saúde emocional."
               },
               {
                 step: "02",
-                title: "Diagnóstico Clínico",
-                desc: "Identificamos as raízes das suas travas mentais."
+                title: "Intervenção Estratégica",
+                desc: "Aplicamos técnicas de terapia cognitivo-comportamental focadas na realidade do mercado digital."
               },
               {
                 step: "03",
-                title: "Plano de Manobra",
-                desc: "Protocolos práticos para sua rotina e negócio."
-              },
-              {
-                step: "04",
-                title: "Escala Sustentável",
-                desc: "Acompanhamento focado em manter o topo."
+                title: "Manutenção de Elite",
+                desc: "Acompanhamento contínuo para garantir que você mantenha o topo sem comprometer sua qualidade de vida."
               }
             ].map((item, idx) => (
-              <div key={idx} className="relative group">
-                <div className="absolute -top-12 right-0 text-7xl font-display font-black text-white/[0.03] group-hover:text-[#FFE100]/5 transition-colors">
+              <div key={idx} className="relative group cursor-default">
+                <div className="text-7xl font-display font-black text-[#FFE100] opacity-20 group-hover:opacity-100 transition-all duration-500 mb-4">
                   {item.step}
                 </div>
                 <h3 className="text-[#FFE100] text-xl font-display font-bold mb-4">{item.title}</h3>
-                <p className="text-gray-400 leading-relaxed text-sm">
+                <p className="text-gray-400 leading-relaxed">
                   {item.desc}
                 </p>
               </div>
@@ -388,11 +410,11 @@ export default function App() {
                 Entendo que o seu "CNPJ" só prospera se o "CPF" estiver saudável. Minha missão é ser o suporte estratégico para que você possa performar no topo, sem perder a essência e a saúde no caminho.
               </p>
               <div className="flex gap-4 pt-4">
-                <a href="#" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#FFE100] hover:border-[#FFE100] transition-all">
-                  <Instagram className="w-5 h-5" />
+                <a href="https://instagram.com/psicologododigital" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#FFE100] hover:border-[#FFE100] transition-all group">
+                  <Instagram className="w-5 h-5 group-hover:text-black" />
                 </a>
-                <a href="#" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#FFE100] hover:border-[#FFE100] transition-all">
-                  <Linkedin className="w-5 h-5" />
+                <a href="https://www.linkedin.com/in/guilhermy-joseph-evaristo-costa-28a78511b/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#FFE100] hover:border-[#FFE100] transition-all group">
+                  <Linkedin className="w-5 h-5 group-hover:text-black" />
                 </a>
               </div>
             </div>
@@ -401,44 +423,46 @@ export default function App() {
       </section>
 
       {/* Social Proof */}
-      <section className="py-24 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-24 overflow-hidden bg-black/50">
+        <div className="max-w-7xl mx-auto px-6 text-center mb-12">
           <SectionTitle subtitle="Resultados Reais">O que dizem os mentorados</SectionTitle>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Lucas M.",
-                role: "Infoprodutor",
-                text: "A terapia com o Guilhermy mudou meu jogo. Eu estava à beira de um burnout e hoje consigo gerir meu time e lançamentos com clareza mental."
-              },
-              {
-                name: "Ana Clara",
-                role: "Content Creator",
-                text: "Finalmente alguém que entende o que é a pressão de uma audiência de 500k pessoas. Me sinto muito mais segura e focada."
-              },
-              {
-                name: "Roberto S.",
-                role: "Gestor de Tráfego",
-                text: "Parei de procrastinar tarefas críticas. O método é direto ao ponto e muito prático para quem não tem tempo a perder."
-              }
-            ].map((item, idx) => (
-              <div key={idx} className="p-8 rounded-3xl glass-card border-white/5">
-                <div className="flex gap-1 mb-4">
-                  {[1, 2, 3, 4, 5].map(i => <Zap key={i} className="w-4 h-4 text-[#FFE100] fill-[#FFE100]" />)}
+        </div>
+
+        <div className="relative group">
+          <motion.div
+            className="flex gap-8 whitespace-nowrap"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              repeat: Infinity,
+              duration: 50,
+              ease: "linear",
+            }}
+            whileHover={{ transition: { duration: 0 } }} // Attempt to pause on hover via transition hack or just let it slide
+          >
+            {[...testimonials, ...testimonials].map((item, idx) => (
+              <div
+                key={idx}
+                className="inline-block w-[350px] p-8 rounded-3xl glass-card border border-white/5 hover:border-[#FFE100]/30 transition-all shrink-0 whitespace-normal bg-black"
+                style={{ verticalAlign: 'top' }}
+              >
+                <div className="flex gap-1 mb-6">
+                  {[1, 2, 3, 4, 5].map(i => (
+                    <Star key={i} className="w-4 h-4 text-[#FFE100] fill-[#FFE100]" />
+                  ))}
                 </div>
-                <p className="text-gray-300 italic mb-6">"{item.text}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#FFE100]/20 flex items-center justify-center font-bold text-[#FFE100]">
+                <p className="text-gray-300 italic mb-8 leading-relaxed">"{item.text}"</p>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-[#FFE100]/10 flex items-center justify-center font-bold text-[#FFE100] border border-[#FFE100]/20">
                     {item.name[0]}
                   </div>
                   <div>
-                    <p className="font-display font-bold text-sm">{item.name}</p>
-                    <p className="text-xs text-gray-500">{item.role}</p>
+                    <p className="font-display font-bold text-base text-white">{item.name}</p>
+                    <p className="text-sm text-gray-500">{item.role}</p>
                   </div>
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
