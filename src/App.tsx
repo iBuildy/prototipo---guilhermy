@@ -521,7 +521,7 @@ export default function App() {
             <span className="font-display font-bold text-lg tracking-tighter">@psicologododigital</span>
           </div>
           <div className="text-sm text-gray-500 text-center">
-            <a href="https://ibuildy.com.br" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+            <a href="https://ibuildy.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
               © 2024 Guilhermy Joseph | Psicólogo do Digital by <span className="text-[#FFE100] font-bold hover:underline">iBuildy</span>
             </a>
             <br className="md:hidden" />
