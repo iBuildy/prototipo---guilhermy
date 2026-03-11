@@ -521,7 +521,7 @@ export default function App() {
             <span className="font-display font-bold text-lg tracking-tighter">@psicologododigital</span>
           </div>
           <div className="text-sm text-gray-500 text-center">
-            © 2024 Guilhermy Joseph - Psicólogo do Digital. Todos os direitos reservados. <br className="md:hidden" />
+            © 2024 Guilhermy Joseph | Psicólogo do Digital by <a href="https://ibuildy.com.br" target="_blank" rel="noopener noreferrer" className="text-[#FFE100] font-bold hover:underline">iBuildy</a><br className="md:hidden" />
             <span className="hidden md:inline"> | </span> CRP 12/17648
           </div>
           <div className="flex gap-4">
