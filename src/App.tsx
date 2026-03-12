@@ -223,10 +223,14 @@ export default function App() {
               </button>
             </div>
             <div className="mt-8 flex items-center gap-4 text-sm text-gray-500">
-              <div className="flex -space-x-2">
-                {[1, 2, 3].map(i => (
+              <div className="hidden md:flex -space-x-2">
+                {[
+                  "https://randomuser.me/api/portraits/men/32.jpg",
+                  "https://randomuser.me/api/portraits/women/44.jpg",
+                  "https://randomuser.me/api/portraits/men/68.jpg"
+                ].map((url, i) => (
                   <div key={i} className="w-8 h-8 rounded-full border-2 border-black bg-gray-800 flex items-center justify-center overflow-hidden">
-                    <img src={`https://picsum.photos/seed/${i + 10}/100/100`} alt="Avatar" referrerPolicy="no-referrer" />
+                    <img src={url} alt="Avatar" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                   </div>
                 ))}
               </div>
