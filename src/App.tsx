@@ -109,6 +109,31 @@ export default function App() {
       name: "Roberto S.",
       role: "Gestor de Tráfego",
       text: "Parei de procrastinar tarefas críticas. O método é direto ao ponto e muito prático para quem não tem tempo a perder."
+    },
+    {
+      name: "Fernando Costa",
+      role: "Especialista em Vendas",
+      text: "Eu estava à beira de um burnout com tantos lançamentos seguidos. A terapia focada me deu ferramentas práticas para blindar minha mente."
+    },
+    {
+      name: "Juliana Martins",
+      role: "Copywriter",
+      text: "O bloqueio criativo estava me destruindo. Entender como minha mente funciona sob pressão mudou completamente meu jogo no trabalho."
+    },
+    {
+      name: "Thiago Oliveira",
+      role: "CEO de Agência",
+      text: "Gerir uma equipe grande no remoto é solitário. O suporte de elite com o Guilhermy é meu porto seguro para decisões estratégicas."
+    },
+    {
+      name: "Camila Rocha",
+      role: "Estrategista Digital",
+      text: "Eu não tinha tempo para terapias tradicionais lentas. O Guilhermy entregou resultados reais para minha sobrecarga mental desde o primeiro mês."
+    },
+    {
+      name: "Bruno Albuquerque",
+      role: "E-commerce",
+      text: "Passei a lucrar mais quando entendi que investir na minha saúde mental não era gasto, mas sim o maior investimento pra escalar a empresa."
     }
   ];
 
@@ -245,7 +270,7 @@ export default function App() {
               </button>
             </div>
             <div className="mt-8 flex items-center gap-4 text-sm text-gray-500">
-              <div className="hidden md:flex -space-x-2">
+              <div className="flex -space-x-2">
                 {[
                   "https://randomuser.me/api/portraits/men/32.jpg",
                   "https://randomuser.me/api/portraits/women/44.jpg",
@@ -462,34 +487,35 @@ export default function App() {
             onTouchStart={() => setIsTestimonialPaused(true)}
             onTouchEnd={() => setIsTestimonialPaused(false)}
           >
-            <div className="overflow-hidden rounded-3xl">
-              <motion.div
-                className="flex"
-                animate={{ x: `-${currentTestimonialIndex * 100}%` }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              >
-                {testimonials.map((item, idx) => (
-                  <div key={idx} className="w-full shrink-0 px-2 md:px-4">
-                    <div className="p-8 md:p-12 rounded-3xl glass-card border border-white/5 bg-black h-full flex flex-col justify-center">
-                      <div className="flex gap-1 mb-6">
-                        {[1, 2, 3, 4, 5].map(i => (
-                          <Star key={i} className="w-5 h-5 text-[#FFE100] fill-[#FFE100]" />
-                        ))}
+            <div className="overflow-hidden rounded-3xl min-h-[400px] flex items-center">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentTestimonialIndex}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="w-full"
+                >
+                  <div className="p-8 md:p-12 rounded-3xl glass-card border border-white/5 bg-black flex flex-col justify-center min-h-[350px]">
+                    <div className="flex gap-1 mb-6">
+                      {[1, 2, 3, 4, 5].map(i => (
+                        <Star key={i} className="w-5 h-5 text-[#FFE100] fill-[#FFE100]" />
+                      ))}
+                    </div>
+                    <p className="text-gray-300 italic mb-8 leading-relaxed text-lg md:text-xl">"{testimonials[currentTestimonialIndex].text}"</p>
+                    <div className="flex items-center gap-4 mt-auto">
+                      <div className="w-14 h-14 rounded-full bg-[#FFE100]/10 flex items-center justify-center font-bold text-[#FFE100] border border-[#FFE100]/20 text-xl">
+                        {testimonials[currentTestimonialIndex].name[0]}
                       </div>
-                      <p className="text-gray-300 italic mb-8 leading-relaxed text-lg md:text-xl">"{item.text}"</p>
-                      <div className="flex items-center gap-4 mt-auto">
-                        <div className="w-14 h-14 rounded-full bg-[#FFE100]/10 flex items-center justify-center font-bold text-[#FFE100] border border-[#FFE100]/20 text-xl">
-                          {item.name[0]}
-                        </div>
-                        <div className="text-left">
-                          <p className="font-display font-bold text-lg text-white">{item.name}</p>
-                          <p className="text-sm text-gray-500">{item.role}</p>
-                        </div>
+                      <div className="text-left">
+                        <p className="font-display font-bold text-lg text-white">{testimonials[currentTestimonialIndex].name}</p>
+                        <p className="text-sm text-gray-500">{testimonials[currentTestimonialIndex].role}</p>
                       </div>
                     </div>
                   </div>
-                ))}
-              </motion.div>
+                </motion.div>
+              </AnimatePresence>
             </div>
 
             {/* Navigation Arrows */}
