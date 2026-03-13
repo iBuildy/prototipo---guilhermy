@@ -7,6 +7,8 @@ import {
   Zap,
   MessageCircle,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Instagram,
   Linkedin,
   Youtube,
@@ -71,6 +73,8 @@ const BOOKING_CONFIG = {
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
+  const [isTestimonialPaused, setIsTestimonialPaused] = useState(false);
 
   const handleBooking = () => {
     window.open(BOOKING_CONFIG.booking, '_blank');
@@ -113,6 +117,24 @@ export default function App() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (isTestimonialPaused) return;
+
+    const interval = setInterval(() => {
+      setCurrentTestimonialIndex((prev) => (prev + 1) % testimonials.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [isTestimonialPaused, testimonials.length]);
+
+  const nextTestimonial = () => {
+    setCurrentTestimonialIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -432,41 +454,69 @@ export default function App() {
           <SectionTitle subtitle="Resultados Reais">O que dizem os mentorados</SectionTitle>
         </div>
 
-        <div className="relative group">
-          <motion.div
-            className="flex gap-8 whitespace-nowrap"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{
-              repeat: Infinity,
-              duration: 50,
-              ease: "linear",
-            }}
-            whileHover={{ transition: { duration: 0 } }} // Attempt to pause on hover via transition hack or just let it slide
+        <div className="max-w-4xl mx-auto px-6 relative">
+          <div
+            className="relative"
+            onMouseEnter={() => setIsTestimonialPaused(true)}
+            onMouseLeave={() => setIsTestimonialPaused(false)}
+            onTouchStart={() => setIsTestimonialPaused(true)}
+            onTouchEnd={() => setIsTestimonialPaused(false)}
           >
-            {[...testimonials, ...testimonials].map((item, idx) => (
-              <div
-                key={idx}
-                className="inline-block w-[350px] p-8 rounded-3xl glass-card border border-white/5 hover:border-[#FFE100]/30 transition-all shrink-0 whitespace-normal bg-black"
-                style={{ verticalAlign: 'top' }}
+            <div className="overflow-hidden rounded-3xl">
+              <motion.div
+                className="flex"
+                animate={{ x: `-${currentTestimonialIndex * 100}%` }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
               >
-                <div className="flex gap-1 mb-6">
-                  {[1, 2, 3, 4, 5].map(i => (
-                    <Star key={i} className="w-4 h-4 text-[#FFE100] fill-[#FFE100]" />
-                  ))}
-                </div>
-                <p className="text-gray-300 italic mb-8 leading-relaxed">"{item.text}"</p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[#FFE100]/10 flex items-center justify-center font-bold text-[#FFE100] border border-[#FFE100]/20">
-                    {item.name[0]}
+                {testimonials.map((item, idx) => (
+                  <div key={idx} className="w-full shrink-0 px-2 md:px-4">
+                    <div className="p-8 md:p-12 rounded-3xl glass-card border border-white/5 bg-black h-full flex flex-col justify-center">
+                      <div className="flex gap-1 mb-6">
+                        {[1, 2, 3, 4, 5].map(i => (
+                          <Star key={i} className="w-5 h-5 text-[#FFE100] fill-[#FFE100]" />
+                        ))}
+                      </div>
+                      <p className="text-gray-300 italic mb-8 leading-relaxed text-lg md:text-xl">"{item.text}"</p>
+                      <div className="flex items-center gap-4 mt-auto">
+                        <div className="w-14 h-14 rounded-full bg-[#FFE100]/10 flex items-center justify-center font-bold text-[#FFE100] border border-[#FFE100]/20 text-xl">
+                          {item.name[0]}
+                        </div>
+                        <div className="text-left">
+                          <p className="font-display font-bold text-lg text-white">{item.name}</p>
+                          <p className="text-sm text-gray-500">{item.role}</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-display font-bold text-base text-white">{item.name}</p>
-                    <p className="text-sm text-gray-500">{item.role}</p>
-                  </div>
-                </div>
-              </div>
+                ))}
+              </motion.div>
+            </div>
+
+            {/* Navigation Arrows */}
+            <button
+              onClick={prevTestimonial}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-6 w-12 h-12 bg-[#FFE100] rounded-full flex items-center justify-center text-black z-10 shadow-lg hover:bg-white transition-colors border-2 border-black focus:outline-none"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={nextTestimonial}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 w-12 h-12 bg-[#FFE100] rounded-full flex items-center justify-center text-black z-10 shadow-lg hover:bg-white transition-colors border-2 border-black focus:outline-none"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Pagination Indicators */}
+          <div className="flex justify-center gap-2 mt-8">
+            {testimonials.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentTestimonialIndex(idx)}
+                className={`w-3 h-3 rounded-full transition-colors focus:outline-none ${currentTestimonialIndex === idx ? 'bg-[#FFE100]' : 'bg-white/30 hover:bg-white/50'}`}
+              />
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
